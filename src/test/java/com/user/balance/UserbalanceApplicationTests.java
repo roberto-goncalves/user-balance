@@ -38,11 +38,16 @@ public class UserbalanceApplicationTests {
 	public void testTransactionsAmountAboveLimit() throws Exception {
 		UserTransaction transaction = new UserTransaction(1, new BigDecimal(100));
 		UserTransaction transaction1 = new UserTransaction(2, new BigDecimal(-99));
+		UserTransaction transaction2 = new UserTransaction(2, new BigDecimal(-41));
 		String json = gson.toJson(transaction);
 		this.mvc.perform(post("/insert").contentType(MediaType.APPLICATION_JSON).content(json))
 				//.andExpect(content().json("{'approved':false,'newlimit':500.0,'deniedReasons':['Transactions amount is higher than Account limit']}"))
 				.andDo(print());
 		json = gson.toJson(transaction1);
+		this.mvc.perform(post("/insert").contentType(MediaType.APPLICATION_JSON).content(json))
+				//.andExpect(content().json("{'approved':false,'newlimit':500.0,'deniedReasons':['Transactions amount is higher than Account limit']}"))
+				.andDo(print());
+		json = gson.toJson(transaction2);
 		this.mvc.perform(post("/insert").contentType(MediaType.APPLICATION_JSON).content(json))
 				//.andExpect(content().json("{'approved':false,'newlimit':500.0,'deniedReasons':['Transactions amount is higher than Account limit']}"))
 				.andDo(print());

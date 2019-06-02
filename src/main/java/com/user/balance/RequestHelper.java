@@ -1,6 +1,7 @@
 package com.user.balance;
 
 import org.springframework.stereotype.Service;
+import sun.awt.image.BufferedImageGraphicsConfig;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -29,14 +30,14 @@ public class RequestHelper {
     }
 
     public boolean checkBalance(BigDecimal balance ,BigDecimal value){
-        if(balance.compareTo(new BigDecimal(0)) > 0){
-            if(addToBalance(balance, value).compareTo(new BigDecimal(0)) > 0){
+        if(balance.compareTo(BigDecimal.ZERO) > 0){
+            if(addToBalance(balance, value).compareTo(BigDecimal.ZERO) > 0){
                 return true;
             }else{
                 return false;
             }
         }else{
-            if(value.compareTo(new BigDecimal(0)) > 0){
+            if(value.compareTo(BigDecimal.ZERO) > 0){
                 return true;
             }else{
                 return false;
