@@ -11,18 +11,31 @@ public class RequestHelper {
 
     private HashMap<Integer, BigDecimal> userMap = new HashMap<>();
 
-    public Object insert(UserTransaction request){
+    public Output insert(UserTransaction request){
         if(userMap.containsKey(request.getUserId())){
             BigDecimal balance = userMap.get(request.getUserId());
             if(checkBalance(balance, request.getAmount())){
                 userMap.put(request.getUserId(), addToBalance(balance, request.getAmount()));
+                return new Output(Message.SUCCESS, new UserTransaction(request.getUserId(), userMap.get(request.getUserId())));
             }else{
-                //não é possivel inserir pq o saldo da menor que 0
+                return new Output(Message.FAILURE_ZERO, null);
             }
         }else{
-            userMap.put(request.getUserId(), request.getAmount());
+            if(checkBalance(BigDecimal.ZERO, request.getAmount())){
+                userMap.put(request.getUserId(), request.getAmount());
+                return new Output(Message.SUCCESS, request);
+            }else{
+                return new Output(Message.FAILURE_ZERO, null);
+            }
         }
-        return userMap;
+    }
+
+    public Output retrieve(Integer userID){
+        if(userMap.containsKey(userID)){
+            return new Output(Message.SUCCESS, new UserTransaction(userID, userMap.get(userID)));
+        }else{
+            return new Output(Message.FAILURE_USER, null);
+        }
     }
 
     public BigDecimal addToBalance(BigDecimal balance, BigDecimal value){
