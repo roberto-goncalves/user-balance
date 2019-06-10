@@ -43,18 +43,10 @@ public class RequestHelper {
     }
 
     public boolean checkBalance(BigDecimal balance ,BigDecimal value){
-        if(balance.compareTo(BigDecimal.ZERO) >= 0){
-            if(addToBalance(balance, value).compareTo(BigDecimal.ZERO) >= 0){
-                return true;
-            }else{
-                return false;
-            }
+        if(addToBalance(balance, value).compareTo(BigDecimal.ZERO) >= 0){
+            return true;
         }else{
-            if(value.compareTo(BigDecimal.ZERO) >= 0){
-                return true;
-            }else{
-                return false;
-            }
+            return false;
         }
     }
 }
