@@ -5,11 +5,12 @@ import sun.awt.image.BufferedImageGraphicsConfig;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class RequestHelper {
 
-    private HashMap<Integer, BigDecimal> userMap = new HashMap<>();
+    private ConcurrentHashMap<Integer, BigDecimal> userMap = new ConcurrentHashMap<>();
 
     public Output insert(UserTransaction request){
         if(userMap.containsKey(request.getUserId())){
