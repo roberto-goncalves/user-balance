@@ -1,4 +1,4 @@
-package com.user.balance;
+package com.moneymanager.transactions;
 
 import java.math.BigDecimal;
 

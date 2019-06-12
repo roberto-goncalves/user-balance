@@ -1,15 +1,13 @@
-package com.user.balance;
+package com.moneymanager.balance;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
-public class User {
+public class UserBalance {
 
     private Integer userId;
     private BigDecimal balance;
 
-    public User(Integer userId) {
+    public UserBalance(Integer userId) {
         this.userId = userId;
         this.balance = BigDecimal.ZERO;
     }
