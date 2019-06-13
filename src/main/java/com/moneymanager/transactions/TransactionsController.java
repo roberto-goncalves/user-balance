@@ -1,5 +1,6 @@
 package com.moneymanager.transactions;
 
+import com.moneymanager.i18n.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,24 +13,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.moneymanager.beans.ResponseBean;
 import com.moneymanager.exception.MoneyManagerException;
-import com.moneymanager.i18n.Messages;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path="/api/transactions", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(path="/api/transaction", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class TransactionsController {
 
     @Autowired
     private TransactionsService transactionsService;
 
-    // FIXME Siga o padrão do rest, POST /nomeDaEntidade
-    // @PostMapping("/")
-    @RequestMapping(path="/insert", method= RequestMethod.POST)
+    @Autowired
+    Message message;
+
+    @RequestMapping(path="/", method= RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public Object insert(@RequestBody UserTransaction request) {
         try {
         	this.transactionsService.insert(request);
-        	return new ResponseBean<UserTransaction>(Messages.SUCCESS, request);
+        	return new ResponseBean<UserTransaction>(message.get("success"), request);
         } catch (MoneyManagerException ex) {
         	return new ResponseBean<UserTransaction>(ex.getMessage(), request);
         }
