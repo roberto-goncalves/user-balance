@@ -30,7 +30,6 @@ public class BalanceService {
 		if (balance == null) {
 			throw  new UserNotFoundException(message.get("failure.userNotFound"));
 		}
-		
         this.validateTransaction(balance, transactionAmount);
         final BigDecimal newBalance = this.getNewBalance(balance, transactionAmount);
         balance.setBalance(newBalance);

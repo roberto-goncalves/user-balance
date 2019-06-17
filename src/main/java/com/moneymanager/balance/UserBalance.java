@@ -16,10 +16,6 @@ public class UserBalance {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
     public BigDecimal getBalance() {
         return balance;
     }

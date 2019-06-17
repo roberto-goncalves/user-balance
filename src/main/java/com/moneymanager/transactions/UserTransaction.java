@@ -5,6 +5,11 @@ import java.math.BigDecimal;
 public class UserTransaction {
 
     private Integer userId;
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
     private BigDecimal amount;
 
     public UserTransaction(Integer userId, BigDecimal amount) {
@@ -16,15 +21,7 @@ public class UserTransaction {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
     public BigDecimal getAmount() {
         return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
     }
 }

@@ -1,40 +1,34 @@
-# user-balance
+MoneyManager
 
-Coding Challenge
+1 - Considerations:
+
+* There is two endpoins [POST] /api/transcation/ which will insert a new transaction and [GET] /api/balances/retrive/<userId> which will retrieve a specific user balance.
+* Since there's no create endpoints, users can be created by altering the number in AccountSeed.class -> seedAccounts
+* AccountSeed have only a @PostConstruct method which means that he will be called only once, just after the bean's initialization
+* i18n/Message is a class with purpose to work as a ResourceBundle which will fetch the code from resources/messages.properties
+* Initialy there is 15 account's created within AccountSeed, with users from id 0 to id 14
+
+2 - Execution:
+
+To compile & run tests: mvn clean install
+
+To run in localhost 8080: mvn spring-boot:run
+
+3 - Example requests:
+
+[Insert Transaction]
+
+curl -X POST -H "Content-Type: application/json" -d  '{"userId":1,"amount":300}' http://localhost:8080/api/transaction/
+
+{"message":"Success.","data":{"userId":1,"amount":300}}
+
+The response is configured to return the POST request as "data" field.
+
+[Retrieve User Balance]
+
+curl -X GET -H "Content-Type: application/json" http://localhost:8080/api/balances/retrieve/1
+
+{"message":"Success.","data":{"userId":1,"balance":300}}
 
 
-You are tasked with writing a piece of software to do Checks and Balances.
 
-It must comprise a HTTP Server with two endpoints:
-
-* One to insert a new monetary transaction, money in or out, for a given user;
-* One to return a user's current balance.
-* You may use whatever language and platform with which you are most comfortable.
-
-
-Requirements:
-
-* It must not be possible to withdraw money for a given user when they don't have enough balance;
-* You should take concurrency issues into consideration;
-* It must be executable in Linux & MacOS machines;
-* You don't have to worry about databases; it's fine to use in-process, in-memory storage;
-* It must be production quality according to your understanding of it - tests, README, etc.
-
-
-General notes:
-
-* This challenge will be extended by you and a Nubank engineer on a different step of the process;
-* Please make sure to anonymise your submission by removing your name from file headers and such;
-* Feel free to expand your design in writing;
-* You will submit the source code for your solution to us as a compressed file containing all the code and possible documentation. * Please make sure to not include unnecessary files such as the Git repository, compiled binaries, etc;
-* Please do not upload your solution to public repositories in GitHub, BitBucket, etc.
-
-
-Things we're looking for:
-
-* Immutability;
-* Separation of concerns;
-* Unit and integration tests;
-* API design;
-* Correct handling of decimal values;
-* Error handling.

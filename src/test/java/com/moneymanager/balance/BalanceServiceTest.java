@@ -26,7 +26,7 @@ public class BalanceServiceTest {
     @Test
     public void testRetrieveSuccess(){
         UserBalance user = service.retrieve(1);
-        Assert.assertEquals((int)user.getUserId(), 1);
+        Assert.assertEquals(1, (int)user.getUserId());
     }
 
     @Test(expected = UserNotFoundException.class)
